@@ -50,7 +50,7 @@ while True:
     cv2.putText(frame, str(car_counter), (frame.shape[1] - 55, 250),
     cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 255, 0), 2)
     cv2.imshow('frame', frame)
-    cv2.imshow('frames', imAux)
+    
 
     k = cv2.waitKey(70) & 0xFF
     if k == 27:
