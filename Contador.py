@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import imutils
 
-cap = cv2.VideoCapture('autos2.mp4')
+cap = cv2.VideoCapture('video.mp4')
 
 fgbg = cv2.bgsegm.createBackgroundSubtractorMOG()
 kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
@@ -15,7 +15,7 @@ while True:
     frame = imutils.resize(frame, width=640)
 
     # Especificamos los puntos extremos del área a analizar
-    area_pts = np.array([[330, 5], [frame.shape[1] - 70, 5], [frame.shape[1] - 70, 360], [330, 360]])
+    area_pts = np.array([[330, 50], [frame.shape[1] - 70, 50], [frame.shape[1] - 70, 250], [330, 250]])
     # Con ayuda de una imagen auxiliar, determinamos el área
     # sobre la cual actuará el detector de movimiento
     imAux = np.zeros(shape=(frame.shape[:2]), dtype=np.uint8)
@@ -35,23 +35,23 @@ while True:
 
     for cnt in cnts:
 
-        if cv2.contourArea(cnt) > 100:
+        if cv2.contourArea(cnt) > 50:
             x, y, w, h = cv2.boundingRect(cnt)
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 255), 1)
 
-            if 462 < (x + w) < 464:
+            if 447 < (x + w) < 449:
                 car_counter = car_counter + 1
-                cv2.line(frame, (450, 5), (450, 360), (0, 255, 0), 3)
+                cv2.line(frame, (448, 50), (448, 250), (0, 255, 0), 3)
 
                 # Visualización del conteo de autos
     cv2.drawContours(frame, [area_pts], -1, (255, 0, 255), 2)
-    cv2.line(frame, (450, 5), (450, 360), (0, 255, 255), 1)
+    cv2.line(frame, (448, 50), (448, 250), (0, 255, 255), 1)
     cv2.rectangle(frame, (frame.shape[1] - 70, 215), (frame.shape[1] - 5, 270), (0, 255, 0), 2)
     cv2.putText(frame, str(car_counter), (frame.shape[1] - 55, 250),
                 cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 255, 0), 2)
     cv2.imshow('frame', frame)
 
-    k = cv2.waitKey(70) & 0xFF
+    k = cv2.waitKey(10) & 0xFF
     if k == 27:
         break
 cap.release()
