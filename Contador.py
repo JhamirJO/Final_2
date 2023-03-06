@@ -43,12 +43,12 @@ while True:
                 car_counter = car_counter + 1
                 cv2.line(frame, (448, 50), (448, 250), (0, 255, 0), 3)
 
-                # Visualización del conteo de autos
+     # Visualización del conteo de autos
     cv2.drawContours(frame, [area_pts], -1, (255, 0, 255), 2)
     cv2.line(frame, (448, 50), (448, 250), (0, 255, 255), 1)
     cv2.rectangle(frame, (frame.shape[1] - 70, 215), (frame.shape[1] - 5, 270), (0, 255, 0), 2)
     cv2.putText(frame, str(car_counter), (frame.shape[1] - 55, 250),
-                cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 255, 0), 2)
+    cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 255, 0), 2)
     cv2.imshow('frame', frame)
 
     k = cv2.waitKey(10) & 0xFF
