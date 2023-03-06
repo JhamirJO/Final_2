@@ -1,11 +1,10 @@
 import cv2
 import numpy as np
 
-
 cap = cv2.VideoCapture('video.mp4')
 
 fgbg = cv2.bgsegm.createBackgroundSubtractorMOG()
-kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3)) # operaciones de erosión y dilatación
 car_counter = 0
 
 while True:
@@ -49,8 +48,11 @@ while True:
     cv2.putText(frame, str(car_counter), (frame.shape[1] - 55, 250),
     cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 255, 0), 2)
     cv2.imshow('frame', frame)
+    #cv2.imshow('aux', imAux)
+    #cv2.imshow('area',image_area)
 
-    k = cv2.waitKey(1) & 0xFF
+
+    k = cv2.waitKey(5) & 0xFF
     if k == 27:
         break
 
